@@ -2,6 +2,7 @@ package com.zero.campaign.main.data;
 
 import com.zero.campaign.main.CAMPAIGN_STATUS;
 import com.zero.campaign.product.data.Product;
+import com.zero.campaign.register.data.Community;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -29,11 +30,23 @@ public class Campaign {
     private LocalDateTime endTime;
     private String imagePath;
     private CAMPAIGN_STATUS status;
-    private String location;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "community_id", referencedColumnName = "id")
+    private Community community;
+
 
     @OneToMany(mappedBy = "campaign", fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
     private List<Product> products;
+
+    public Community getCommunity() {
+        return community;
+    }
+
+    public void setCommunity(Community community) {
+        this.community = community;
+    }
 
     public List<Product> getProducts() {
         return products;
@@ -59,13 +72,12 @@ public class Campaign {
         this.name = name;
     }
 
+    public String getVendorName() {
+        return vendorName;
+    }
 
     public void setVendorName(String vendorName) {
         this.vendorName = vendorName;
-    }
-
-    public String getVendorName() {
-        return vendorName;
     }
 
     public LocalDateTime getStartTime() {
@@ -100,12 +112,5 @@ public class Campaign {
         this.status = status;
     }
 
-    public String getLocation() {
-        return location;
-    }
 
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
-    }
+}
