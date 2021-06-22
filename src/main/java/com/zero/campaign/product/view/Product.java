@@ -10,10 +10,7 @@ public class Product {
     private String name;
     private String type;
     private long campaignId;
-    private LocalDateTime createDate;
-    private LocalDateTime updateDate;
-    private String createdBy;
-    private String updatedBy;
+
 
     public long getCampaignId() {
         return campaignId;
@@ -49,37 +46,7 @@ public class Product {
         this.type = type;
     }
 
-    public LocalDateTime getCreateDate() {
-        return createDate;
-    }
 
-    public void setCreateDate(LocalDateTime createDate) {
-        this.createDate = createDate;
-    }
-
-    public LocalDateTime getUpdateDate() {
-        return updateDate;
-    }
-
-    public void setUpdateDate(LocalDateTime updateDate) {
-        this.updateDate = updateDate;
-    }
-
-    public String getCreatedBy() {
-        return createdBy;
-    }
-
-    public void setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
-    }
-
-    public String getUpdatedBy() {
-        return updatedBy;
-    }
-
-    public void setUpdatedBy(String updatedBy) {
-        this.updatedBy = updatedBy;
-    }
 
 
 }
