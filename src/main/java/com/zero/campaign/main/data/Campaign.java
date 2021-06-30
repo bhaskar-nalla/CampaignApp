@@ -3,6 +3,7 @@ package com.zero.campaign.main.data;
 import com.zero.campaign.main.CAMPAIGN_STATUS;
 import com.zero.campaign.product.data.Product;
 import com.zero.campaign.register.data.Community;
+import com.zero.campaign.register.data.Vendor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -25,11 +26,17 @@ public class Campaign {
     )
     private Long id;
     private String name;
-    private String vendorName;
+
     private LocalDateTime startTime;
     private LocalDateTime endTime;
     private String imagePath;
     private CAMPAIGN_STATUS status;
+
+
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "vendor_id", referencedColumnName = "id")
+    private Vendor vendor;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "community_id", referencedColumnName = "id")
@@ -72,14 +79,6 @@ public class Campaign {
         this.name = name;
     }
 
-    public String getVendorName() {
-        return vendorName;
-    }
-
-    public void setVendorName(String vendorName) {
-        this.vendorName = vendorName;
-    }
-
     public LocalDateTime getStartTime() {
         return startTime;
     }
@@ -110,6 +109,14 @@ public class Campaign {
 
     public void setStatus(CAMPAIGN_STATUS status) {
         this.status = status;
+    }
+
+    public Vendor getVendor() {
+        return vendor;
+    }
+
+    public void setVendor(Vendor vendor) {
+        this.vendor = vendor;
     }
 
 
