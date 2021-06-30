@@ -26,7 +26,7 @@ public class Campaign {
     )
     private Long id;
     private String name;
-
+    private Long community_id;
     private LocalDateTime startTime;
     private LocalDateTime endTime;
     private String imagePath;
@@ -34,26 +34,24 @@ public class Campaign {
 
 
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "vendor_id", referencedColumnName = "id")
     private Vendor vendor;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "community_id", referencedColumnName = "id")
-    private Community community;
 
 
     @OneToMany(mappedBy = "campaign", fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
     private List<Product> products;
 
-    public Community getCommunity() {
-        return community;
+    public Long getCommunity_id() {
+        return community_id;
     }
 
-    public void setCommunity(Community community) {
-        this.community = community;
+    public void setCommunity_id(Long community_id) {
+        this.community_id = community_id;
     }
+
 
     public List<Product> getProducts() {
         return products;

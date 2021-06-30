@@ -3,9 +3,7 @@ package com.zero.campaign.main;
 import com.zero.campaign.main.view.Campaign;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.annotation.PathVariable;
 
-import javax.websocket.server.PathParam;
 import java.util.List;
 
 @RestController
@@ -18,29 +16,34 @@ public class CampaignController {
     @PostMapping("/propose")
     public Campaign proposeCampaign(@RequestBody Campaign campaign)
     {
-
-        return campaign;
+        return campaignService.proposeCampaign(campaign);
     }
 
     @PutMapping("/confirm/{id}")
-    public void confirmCampaign(@PathVariable("id") long id){
-
+    public void confirmCampaign(@PathVariable("id") Long id){
+        campaignService.confirmCampaign(id);
     }
     @PutMapping("/start/{id}")
-    public void startCampaign(@PathVariable("id") long id)
+    public void startCampaign(@PathVariable("id") Long id)
     {
-
+        campaignService.startCampaign(id);
     }
-    @PutMapping("/edit/{id}")
-    public void editCampaign(@PathVariable("id") long id)
+    @PutMapping("/edit")
+    public void editCampaign(@RequestBody Campaign campaign)
     {
-
+        campaignService.editCampaign(campaign);
     }
 
     @PutMapping("/close/{id}")
     public  void closeCampaign(@PathVariable("id") long id)
     {
+        campaignService.closeCampaign(id);
+    }
 
+    @PutMapping("/cancel/{id}")
+    public  void cancelCampaign(@PathVariable("id") long id)
+    {
+        campaignService.cancelCampaign(id);
     }
 
     @GetMapping("/vendor/{id}")
