@@ -2,6 +2,7 @@ package com.zero.campaign.main;
 
 import com.zero.campaign.main.data.CampaignRepository;
 import com.zero.campaign.main.view.Campaign;
+import com.zero.campaign.register.view.Community;
 import com.zero.campaign.register.view.Vendor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,12 +69,14 @@ public class CampaignService {
     public List<Campaign> getCampaignsByCommunity(Long communityId)
     {
         List<Campaign> viewCampaign = new ArrayList<>();
-
+        Community community = new Community();
         Collection<com.zero.campaign.main.data.Campaign> dataCampaign = campaignRepository.findCampaignsByCommunityId(communityId);
 
         dataCampaign.forEach(campaignRec->{
             Campaign campaign = new Campaign();
             BeanUtils.copyProperties(campaignRec,campaign);
+            BeanUtils.copyProperties(campaignRec.getCommunity(),community);
+            campaign.setCommunity(community);
             viewCampaign.add(campaign);
         });
         return viewCampaign;

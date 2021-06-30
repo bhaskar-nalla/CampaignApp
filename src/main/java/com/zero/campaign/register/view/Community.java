@@ -1,15 +1,14 @@
 package com.zero.campaign.register.view;
 
 
-import com.zero.campaign.register.data.VENDOR_TYPE;
 
-public class Vendor {
+public class Community {
 
     private String name;
-    private VENDOR_TYPE type;
     private long phone_number;
     private String email;
     private Address address;
+
 
     public String getName() {
         return name;
@@ -17,14 +16,6 @@ public class Vendor {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public VENDOR_TYPE getType() {
-        return type;
-    }
-
-    public void setType(VENDOR_TYPE type) {
-        this.type = type;
     }
 
     public long getPhone_number() {
@@ -52,14 +43,4 @@ public class Vendor {
     }
 
 
-    @Override
-    public String toString() {
-        return "Vendor{" +
-                "name='" + name + '\'' +
-                ", type=" + type +
-                ", phone_number=" + phone_number +
-                ", email='" + email + '\'' +
-                ", address=" + address +
-                '}';
-    }
 }

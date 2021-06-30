@@ -1,6 +1,7 @@
 package com.zero.campaign.main.view;
 
 import com.zero.campaign.main.CAMPAIGN_STATUS;
+import com.zero.campaign.register.view.Community;
 import com.zero.campaign.register.view.Vendor;
 
 import java.time.LocalDateTime;
@@ -17,18 +18,7 @@ public class Campaign {
     private CAMPAIGN_STATUS status;
     private String location;
     private Vendor vendor;
-
-    public Vendor getVendor() {
-        return vendor;
-    }
-
-    public void setVendor(Vendor vendor) {
-        this.vendor = vendor;
-    }
-
-
-
-
+    private Community community;
 
     public Campaign() {
     }
@@ -40,6 +30,22 @@ public class Campaign {
         this.imagePath = imagePath;
         this.status = status;
         this.location = location;
+    }
+
+    public Vendor getVendor() {
+        return vendor;
+    }
+
+    public void setVendor(Vendor vendor) {
+        this.vendor = vendor;
+    }
+
+    public Community getCommunity() {
+        return community;
+    }
+
+    public void setCommunity(Community community) {
+        this.community = community;
     }
 
     public Long getId() {

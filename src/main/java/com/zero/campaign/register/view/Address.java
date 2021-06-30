@@ -1,15 +1,9 @@
-package com.zero.campaign.register.data;
+package com.zero.campaign.register.view;
 
-import javax.persistence.*;
 
-@Entity
-@Table(name = "address")
 public class Address {
 
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
     private String number;
     private String address1;
     private String address2;
@@ -63,14 +57,6 @@ public class Address {
 
     public void setPin(long pin) {
         this.pin = pin;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
 }
