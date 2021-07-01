@@ -56,4 +56,10 @@ public class CampaignController {
     {
         return campaignService.getCampaignsByCommunity(communityId);
     }
+
+    @GetMapping("/{id}")
+    public Campaign getCampaignsByCommunityId(@PathVariable("id") Long campaignId)
+    {
+        return campaignService.getCampaignById(campaignId);
+    }
 }
