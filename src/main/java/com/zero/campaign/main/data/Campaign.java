@@ -26,6 +26,7 @@ public class Campaign {
     )
     private Long id;
     private String name;
+    @Column(nullable = false)
     private Long community_id;
     private LocalDateTime startTime;
     private LocalDateTime endTime;
@@ -33,9 +34,8 @@ public class Campaign {
     private CAMPAIGN_STATUS status;
 
 
-
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "vendor_id", referencedColumnName = "id")
+    @OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY )
+    @JoinColumn(name = "vendor_id", referencedColumnName = "id", nullable = false)
     private Vendor vendor;
 
 
@@ -43,6 +43,7 @@ public class Campaign {
     @OneToMany(mappedBy = "campaign", fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
     private List<Product> products;
+
 
     public Long getCommunity_id() {
         return community_id;

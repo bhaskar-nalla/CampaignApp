@@ -93,4 +93,18 @@ public class Campaign {
     public void setCommunityId(Long communityId) {
         this.communityId = communityId;
     }
+
+    @Override
+    public String toString() {
+        return "Campaign{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", startTime=" + startTime +
+                ", endTime=" + endTime +
+                ", imagePath='" + imagePath + '\'' +
+                ", status=" + status +
+                ", vendor=" + vendor +
+                ", communityId=" + communityId +
+                '}';
+    }
 }

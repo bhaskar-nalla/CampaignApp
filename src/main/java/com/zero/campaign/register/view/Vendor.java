@@ -5,6 +5,7 @@ import com.zero.campaign.register.data.VENDOR_TYPE;
 
 public class Vendor {
 
+    private Long id;
     private String name;
     private VENDOR_TYPE type;
     private long phone_number;
@@ -51,11 +52,19 @@ public class Vendor {
         this.address = address;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     @Override
     public String toString() {
         return "Vendor{" +
-                "name='" + name + '\'' +
+                "id=" + id +
+                ", name='" + name + '\'' +
                 ", type=" + type +
                 ", phone_number=" + phone_number +
                 ", email='" + email + '\'' +

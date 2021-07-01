@@ -25,11 +25,20 @@ public class CampaignService {
     public Campaign proposeCampaign(Campaign campaign)
     {
         com.zero.campaign.main.data.Campaign dataCampaign = new com.zero.campaign.main.data.Campaign();
-
+        com.zero.campaign.register.data.Vendor dataVendor = new com.zero.campaign.register.data.Vendor();
         BeanUtils.copyProperties(campaign,dataCampaign);
+        BeanUtils.copyProperties(campaign.getVendor(),dataVendor);
+        dataCampaign.setVendor(dataVendor);
         dataCampaign.setCommunity_id(campaign.getCommunityId());
         dataCampaign.setStatus(CAMPAIGN_STATUS.PROPOSED);
-        BeanUtils.copyProperties(campaignRepository.save(dataCampaign),campaign);
+
+        dataCampaign = campaignRepository.save(dataCampaign);
+
+        BeanUtils.copyProperties(dataCampaign,campaign);
+        Vendor viewVendor = new Vendor();
+        BeanUtils.copyProperties(dataCampaign.getVendor(),viewVendor);
+        campaign.setVendor(viewVendor);
+
         return campaign;
     }
 
