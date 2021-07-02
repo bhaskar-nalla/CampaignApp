@@ -10,11 +10,16 @@ public class Vendor {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private Long id;
     private String name;
     private VENDOR_TYPE type;
-    private long phone_number;
+    private long phoneNumber;
     private String email;
+    private String imagePath;
+    private String aboutUs;
+    private String website;
+
+
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id", referencedColumnName = "id")
@@ -25,11 +30,11 @@ public class Vendor {
     private String createdBy;
     private String updatedBy;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -47,14 +52,6 @@ public class Vendor {
 
     public void setType(VENDOR_TYPE type) {
         this.type = type;
-    }
-
-    public long getPhone_number() {
-        return phone_number;
-    }
-
-    public void setPhone_number(long phone_number) {
-        this.phone_number = phone_number;
     }
 
     public String getEmail() {
@@ -105,6 +102,36 @@ public class Vendor {
         this.updatedBy = updatedBy;
     }
 
+    public long getPhoneNumber() {
+        return phoneNumber;
+    }
 
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
+
+    public void setPhoneNumber(long phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getAboutUs() {
+        return aboutUs;
+    }
+
+    public void setAboutUs(String aboutUs) {
+        this.aboutUs = aboutUs;
+    }
+
+    public String getWebsite() {
+        return website;
+    }
+
+    public void setWebsite(String website) {
+        this.website = website;
+    }
 
 }

@@ -1,14 +1,11 @@
-package com.zero.campaign.register.data;
+package com.zero.campaign.register.view;
 
-import javax.persistence.*;
-import java.time.LocalDateTime;
+import com.zero.campaign.register.data.Community;
 
-@Entity
-@Table(name = "customer")
+
 public class Customer {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+
     private long id;
     private String loginId;
     private String password;
@@ -18,14 +15,8 @@ public class Customer {
     private String email;
     private String unitNumber;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "community_id", referencedColumnName = "id")
     private Community community;
 
-    private LocalDateTime createDate;
-    private LocalDateTime updateDate;
-    private String createdBy;
-    private String updatedBy;
 
     public long getId() {
         return id;
@@ -99,35 +90,19 @@ public class Customer {
         this.community = community;
     }
 
-    public LocalDateTime getCreateDate() {
-        return createDate;
-    }
 
-    public void setCreateDate(LocalDateTime createDate) {
-        this.createDate = createDate;
-    }
-
-    public LocalDateTime getUpdateDate() {
-        return updateDate;
-    }
-
-    public void setUpdateDate(LocalDateTime updateDate) {
-        this.updateDate = updateDate;
-    }
-
-    public String getCreatedBy() {
-        return createdBy;
-    }
-
-    public void setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
-    }
-
-    public String getUpdatedBy() {
-        return updatedBy;
-    }
-
-    public void setUpdatedBy(String updatedBy) {
-        this.updatedBy = updatedBy;
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "id=" + id +
+                ", loginId='" + loginId + '\'' +
+                ", password='" + password + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", phoneNumber=" + phoneNumber +
+                ", email='" + email + '\'' +
+                ", unitNumber='" + unitNumber + '\'' +
+                ", community=" + community +
+                '}';
     }
 }

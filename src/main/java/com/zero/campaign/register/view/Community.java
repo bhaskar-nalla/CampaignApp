@@ -4,9 +4,12 @@ package com.zero.campaign.register.view;
 
 public class Community {
 
+    private Long id;
     private String name;
     private long phone_number;
     private String email;
+    private String imagePath;
+
     private Address address;
 
 
@@ -43,4 +46,31 @@ public class Community {
     }
 
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
+
+    @Override
+    public String toString() {
+        return "Community{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", phone_number=" + phone_number +
+                ", email='" + email + '\'' +
+                ", imagePath='" + imagePath + '\'' +
+                ", address=" + address +
+                '}';
+    }
 }

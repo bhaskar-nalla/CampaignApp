@@ -59,4 +59,15 @@ public class Address {
         this.pin = pin;
     }
 
+    @Override
+    public String toString() {
+        return "Address{" +
+                "number='" + number + '\'' +
+                ", address1='" + address1 + '\'' +
+                ", address2='" + address2 + '\'' +
+                ", city='" + city + '\'' +
+                ", state='" + state + '\'' +
+                ", pin=" + pin +
+                '}';
+    }
 }

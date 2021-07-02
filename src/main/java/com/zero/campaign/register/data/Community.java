@@ -11,8 +11,8 @@ public class Community {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String name;
-
-    private long phone_number;
+    private String imagePath;
+    private long phoneNumber;
     private String email;
 
     @OneToOne(cascade = CascadeType.ALL)
@@ -39,14 +39,6 @@ public class Community {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public long getPhone_number() {
-        return phone_number;
-    }
-
-    public void setPhone_number(long phone_number) {
-        this.phone_number = phone_number;
     }
 
     public String getEmail() {
@@ -95,5 +87,21 @@ public class Community {
 
     public void setUpdatedBy(String updatedBy) {
         this.updatedBy = updatedBy;
+    }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
+
+    public long getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(long phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 }
