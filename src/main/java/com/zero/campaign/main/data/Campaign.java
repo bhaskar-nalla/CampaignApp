@@ -27,7 +27,7 @@ public class Campaign {
     private Long id;
     private String name;
     @Column(nullable = false)
-    private Long community_id;
+    private Long communityId;
     private LocalDateTime startTime;
     private LocalDateTime endTime;
     private String imagePath;
@@ -44,15 +44,13 @@ public class Campaign {
             cascade = CascadeType.ALL)
     private List<Product> products;
 
-
-    public Long getCommunity_id() {
-        return community_id;
+    public Long getCommunityId() {
+        return communityId;
     }
 
-    public void setCommunity_id(Long community_id) {
-        this.community_id = community_id;
+    public void setCommunityId(Long communityId) {
+        this.communityId = communityId;
     }
-
 
     public List<Product> getProducts() {
         return products;

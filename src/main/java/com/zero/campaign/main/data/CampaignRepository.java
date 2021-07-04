@@ -9,7 +9,7 @@ import java.util.Collection;
 @Repository
 public interface CampaignRepository extends JpaRepository<Campaign, Long> {
 
-    @Query("SELECT c FROM Campaign c WHERE c.community_id = :campaignId")
+    @Query("SELECT c FROM Campaign c WHERE c.communityId = :campaignId")
     Collection<Campaign> findCampaignsByCommunityId(Long campaignId);
 
     @Query("SELECT c FROM Campaign c WHERE c.vendor.id = :vendorId")

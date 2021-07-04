@@ -3,13 +3,21 @@ package com.zero.campaign.register.view;
 
 public class Address {
 
-
+    private Long id;
     private String number;
     private String address1;
     private String address2;
     private String city;
     private String state;
     private long pin;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getNumber() {
         return number;

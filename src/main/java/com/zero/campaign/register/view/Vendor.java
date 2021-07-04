@@ -2,6 +2,7 @@ package com.zero.campaign.register.view;
 
 
 import com.zero.campaign.register.data.VENDOR_TYPE;
+import com.zero.campaign.register.view.VendorDetails;
 
 public class Vendor {
 
@@ -11,10 +12,8 @@ public class Vendor {
     private long phoneNumber;
     private String email;
     private String imagePath;
-    private String aboutUs;
-    private String website;
+    private VendorDetails vendorDetails;
 
-    private Address address;
 
     public Long getId() {
         return id;
@@ -64,28 +63,12 @@ public class Vendor {
         this.imagePath = imagePath;
     }
 
-    public String getAboutUs() {
-        return aboutUs;
+    public VendorDetails getVendorDetails() {
+        return vendorDetails;
     }
 
-    public void setAboutUs(String aboutUs) {
-        this.aboutUs = aboutUs;
-    }
-
-    public String getWebsite() {
-        return website;
-    }
-
-    public void setWebsite(String website) {
-        this.website = website;
-    }
-
-    public Address getAddress() {
-        return address;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
+    public void setVendorDetails(VendorDetails vendorDetails) {
+        this.vendorDetails = vendorDetails;
     }
 
     @Override
@@ -97,9 +80,7 @@ public class Vendor {
                 ", phoneNumber=" + phoneNumber +
                 ", email='" + email + '\'' +
                 ", imagePath='" + imagePath + '\'' +
-                ", aboutUs='" + aboutUs + '\'' +
-                ", website='" + website + '\'' +
-                ", address=" + address +
+                ", vendorDetails=" + vendorDetails +
                 '}';
     }
 }

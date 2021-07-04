@@ -21,7 +21,17 @@ public class RegistrationController {
     @PutMapping("/vendor/update")
     public Vendor updateVendor(@RequestBody Vendor vendor)
     {
-        return registrationService.updateVendor(vendor);
+        return registrationService.registerVendor(vendor);
+    }
+
+    @GetMapping("/vendor/{id}")
+    public Vendor getVendor(@PathVariable("id") Long id){
+        return  registrationService.getVendor(id);
+    }
+
+    @GetMapping("/vendor_details/{id}")
+    public VendorDetails getVendorDetails(@PathVariable("id") Long id){
+        return  registrationService.getVendorDetailsByVendor(id);
     }
 
     @PostMapping("/community/register")

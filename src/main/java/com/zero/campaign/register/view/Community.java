@@ -6,10 +6,10 @@ public class Community {
 
     private Long id;
     private String name;
-    private long phone_number;
+    private long phoneNumber;
     private String email;
     private String imagePath;
-
+    private Integer unitCount;
     private Address address;
 
 
@@ -21,12 +21,12 @@ public class Community {
         this.name = name;
     }
 
-    public long getPhone_number() {
-        return phone_number;
+    public long getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setPhone_number(long phone_number) {
-        this.phone_number = phone_number;
+    public void setPhoneNumber(long phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public String getEmail() {
@@ -62,15 +62,27 @@ public class Community {
         this.imagePath = imagePath;
     }
 
+
+
+    public Integer getUnitCount() {
+        return unitCount;
+    }
+
+    public void setUnitCount(Integer unitCount) {
+        this.unitCount = unitCount;
+    }
+
     @Override
     public String toString() {
         return "Community{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", phone_number=" + phone_number +
+                ", phoneNumber=" + phoneNumber +
                 ", email='" + email + '\'' +
                 ", imagePath='" + imagePath + '\'' +
+                ", unitCount=" + unitCount +
                 ", address=" + address +
                 '}';
     }
+
 }

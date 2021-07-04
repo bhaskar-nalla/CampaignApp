@@ -8,11 +8,12 @@ public class Address {
 
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private Long id;
     private String number;
     private String address1;
     private String address2;
+    private ADDRESS_TYPE type;
     private String city;
     private String state;
     private long pin;
@@ -65,12 +66,19 @@ public class Address {
         this.pin = pin;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
+    public ADDRESS_TYPE getType() {
+        return type;
+    }
+
+    public void setType(ADDRESS_TYPE type) {
+        this.type = type;
+    }
 }

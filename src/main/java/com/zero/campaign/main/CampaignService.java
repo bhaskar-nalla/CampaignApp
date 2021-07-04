@@ -29,11 +29,8 @@ public class CampaignService {
         BeanUtils.copyProperties(campaign,dataCampaign);
         BeanUtils.copyProperties(campaign.getVendor(),dataVendor);
         dataCampaign.setVendor(dataVendor);
-        dataCampaign.setCommunity_id(campaign.getCommunityId());
         dataCampaign.setStatus(CAMPAIGN_STATUS.PROPOSED);
-
         dataCampaign = campaignRepository.save(dataCampaign);
-        campaign.setCommunityId(dataCampaign.getCommunity_id());
         BeanUtils.copyProperties(dataCampaign,campaign);
         Vendor viewVendor = new Vendor();
         BeanUtils.copyProperties(dataCampaign.getVendor(),viewVendor);
@@ -71,7 +68,6 @@ public class CampaignService {
         com.zero.campaign.main.data.Campaign dataCampaign = new com.zero.campaign.main.data.Campaign();
 
         BeanUtils.copyProperties(campaign,dataCampaign);
-        dataCampaign.setCommunity_id(campaign.getCommunityId());
         campaignRepository.save(dataCampaign);
     }
 
@@ -100,7 +96,6 @@ public class CampaignService {
         dataCampaign.forEach(campaignRec->{
             Campaign campaign = new Campaign();
             BeanUtils.copyProperties(campaignRec,campaign);
-            campaign.setCommunityId(campaignRec.getCommunity_id());
             viewCampaign.add(campaign);
         });
         return viewCampaign;
@@ -110,7 +105,6 @@ public class CampaignService {
         Optional<com.zero.campaign.main.data.Campaign> dataCampaign = campaignRepository.findById(campaignId);
         Campaign viewCampaign = new Campaign();
         BeanUtils.copyProperties(dataCampaign.get(),viewCampaign);
-        viewCampaign.setCommunityId(dataCampaign.get().getCommunity_id());
         Vendor viewVendor = new Vendor();
         BeanUtils.copyProperties(dataCampaign.get().getVendor(),viewVendor);
         viewCampaign.setVendor(viewVendor);

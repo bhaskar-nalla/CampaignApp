@@ -4,22 +4,18 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "community")
-public class Community {
+@Table(name = "vendor_details")
+public class VendorDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
-    private String name;
-    private String imagePath;
-    private long phoneNumber;
-    private String email;
-    private Integer unitCount;
+    private String aboutUs;
+    private String website;
 
-    @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "address_id", referencedColumnName = "id")
     private Address address;
-
 
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
@@ -34,20 +30,20 @@ public class Community {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getAboutUs() {
+        return aboutUs;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setAboutUs(String aboutUs) {
+        this.aboutUs = aboutUs;
     }
 
-    public String getEmail() {
-        return email;
+    public String getWebsite() {
+        return website;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setWebsite(String website) {
+        this.website = website;
     }
 
     public Address getAddress() {
@@ -90,27 +86,17 @@ public class Community {
         this.updatedBy = updatedBy;
     }
 
-    public String getImagePath() {
-        return imagePath;
-    }
-
-    public void setImagePath(String imagePath) {
-        this.imagePath = imagePath;
-    }
-
-    public long getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(long phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public Integer getUnitCount() {
-        return unitCount;
-    }
-
-    public void setUnitCount(Integer unitCount) {
-        this.unitCount = unitCount;
+    @Override
+    public String toString() {
+        return "VendorDetails{" +
+                "id=" + id +
+                ", aboutUs='" + aboutUs + '\'' +
+                ", website='" + website + '\'' +
+                ", address=" + address +
+                ", createDate=" + createDate +
+                ", updateDate=" + updateDate +
+                ", createdBy='" + createdBy + '\'' +
+                ", updatedBy='" + updatedBy + '\'' +
+                '}';
     }
 }

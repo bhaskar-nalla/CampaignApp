@@ -2,28 +2,24 @@ package com.zero.campaign.register.data;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Entity
 @Table(name = "vendor")
 public class Vendor {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     private String name;
     private VENDOR_TYPE type;
     private long phoneNumber;
     private String email;
     private String imagePath;
-    private String aboutUs;
-    private String website;
 
 
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "address_id", referencedColumnName = "id")
-    private Address address;
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "vendor_details_id", referencedColumnName = "id")
+    private VendorDetails vendorDetails;
 
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
@@ -54,6 +50,14 @@ public class Vendor {
         this.type = type;
     }
 
+    public long getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(long phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
     public String getEmail() {
         return email;
     }
@@ -62,12 +66,20 @@ public class Vendor {
         this.email = email;
     }
 
-    public Address getAddress() {
-        return address;
+    public String getImagePath() {
+        return imagePath;
     }
 
-    public void setAddress(Address address) {
-        this.address = address;
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
+
+    public VendorDetails getVendorDetails() {
+        return vendorDetails;
+    }
+
+    public void setVendorDetails(VendorDetails vendorDetails) {
+        this.vendorDetails = vendorDetails;
     }
 
     public LocalDateTime getCreateDate() {
@@ -102,36 +114,20 @@ public class Vendor {
         this.updatedBy = updatedBy;
     }
 
-    public long getPhoneNumber() {
-        return phoneNumber;
+    @Override
+    public String toString() {
+        return "Vendor{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", type=" + type +
+                ", phoneNumber=" + phoneNumber +
+                ", email='" + email + '\'' +
+                ", imagePath='" + imagePath + '\'' +
+                ", vendorDetails=" + vendorDetails +
+                ", createDate=" + createDate +
+                ", updateDate=" + updateDate +
+                ", createdBy='" + createdBy + '\'' +
+                ", updatedBy='" + updatedBy + '\'' +
+                '}';
     }
-
-    public String getImagePath() {
-        return imagePath;
-    }
-
-    public void setImagePath(String imagePath) {
-        this.imagePath = imagePath;
-    }
-
-    public void setPhoneNumber(long phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public String getAboutUs() {
-        return aboutUs;
-    }
-
-    public void setAboutUs(String aboutUs) {
-        this.aboutUs = aboutUs;
-    }
-
-    public String getWebsite() {
-        return website;
-    }
-
-    public void setWebsite(String website) {
-        this.website = website;
-    }
-
 }
