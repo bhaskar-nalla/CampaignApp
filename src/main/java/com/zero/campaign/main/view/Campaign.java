@@ -16,7 +16,7 @@ public class Campaign {
     private LocalDateTime endTime;
     private String imagePath;
     private CAMPAIGN_STATUS status;
-    private Vendor vendor;
+    private Long vendorId;
     private Long communityId;
 
     public Campaign() {
@@ -30,13 +30,7 @@ public class Campaign {
         this.status = status;
     }
 
-    public Vendor getVendor() {
-        return vendor;
-    }
 
-    public void setVendor(Vendor vendor) {
-        this.vendor = vendor;
-    }
 
     public Long getId() {
         return id;
@@ -94,6 +88,14 @@ public class Campaign {
         this.communityId = communityId;
     }
 
+    public Long getVendorId() {
+        return vendorId;
+    }
+
+    public void setVendorId(Long vendorId) {
+        this.vendorId = vendorId;
+    }
+
     @Override
     public String toString() {
         return "Campaign{" +
@@ -103,7 +105,7 @@ public class Campaign {
                 ", endTime=" + endTime +
                 ", imagePath='" + imagePath + '\'' +
                 ", status=" + status +
-                ", vendor=" + vendor +
+                ", vendorId=" + vendorId +
                 ", communityId=" + communityId +
                 '}';
     }

@@ -21,7 +21,7 @@ public class RegistrationController {
     @PutMapping("/vendor/update")
     public Vendor updateVendor(@RequestBody Vendor vendor)
     {
-        return registrationService.registerVendor(vendor);
+        return registrationService.updateVendor(vendor);
     }
 
     @GetMapping("/vendor/{id}")

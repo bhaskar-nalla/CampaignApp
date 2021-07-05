@@ -14,7 +14,7 @@ public class VendorDetails {
     private String website;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "address_id", referencedColumnName = "id")
+    @JoinColumn(name = "address_id", referencedColumnName = "id", nullable = false)
     private Address address;
 
     private LocalDateTime createDate;

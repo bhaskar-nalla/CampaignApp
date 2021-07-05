@@ -28,16 +28,14 @@ public class Campaign {
     private String name;
     @Column(nullable = false)
     private Long communityId;
+
+    @Column(nullable = false)
+    private Long vendorId;
+
     private LocalDateTime startTime;
     private LocalDateTime endTime;
     private String imagePath;
     private CAMPAIGN_STATUS status;
-
-
-    @OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY )
-    @JoinColumn(name = "vendor_id", referencedColumnName = "id", nullable = false)
-    private Vendor vendor;
-
 
 
     @OneToMany(mappedBy = "campaign", fetch = FetchType.LAZY,
@@ -108,13 +106,11 @@ public class Campaign {
         this.status = status;
     }
 
-    public Vendor getVendor() {
-        return vendor;
+    public Long getVendorId() {
+        return vendorId;
     }
 
-    public void setVendor(Vendor vendor) {
-        this.vendor = vendor;
+    public void setVendorId(Long vendorId) {
+        this.vendorId = vendorId;
     }
-
-
 }

@@ -17,13 +17,13 @@ public class RegistrationService {
     @Autowired
     private VendorRepository vendorRepository;
     @Autowired
-    private  AddressRepository addressRepository;
+    private AddressRepository addressRepository;
     @Autowired
-    private  CommunityRepository communityRepository;
+    private CommunityRepository communityRepository;
     @Autowired
-    private  CustomerRepository customerRepository;
+    private CustomerRepository customerRepository;
     @Autowired
-    private  VendorDetailsRepository vendorDetailsRepository;
+    private VendorDetailsRepository vendorDetailsRepository;
 
 
     public Vendor registerVendor(Vendor vendor) {
@@ -40,6 +40,26 @@ public class RegistrationService {
 
         dataAddress.setType(ADDRESS_TYPE.BUSINESS);
         BeanUtils.copyProperties(vendorRepository.save(dataVendor), vendor);
+        return vendor;
+    }
+
+    public Vendor updateVendor(Vendor vendor) {
+
+        Optional<com.zero.campaign.register.data.Vendor> dataVendor = vendorRepository.findById(vendor.getId());
+        Optional<com.zero.campaign.register.data.VendorDetails> dataVendorDetails = vendorDetailsRepository.findById( dataVendor.get().getVendorDetails().getId());
+        com.zero.campaign.register.data.Address dataAddress = new com.zero.campaign.register.data.Address();
+
+        BeanUtils.copyProperties(vendor.getVendorDetails().getAddress(), dataAddress);
+        dataAddress.setId(dataVendorDetails.get().getAddress().getId());
+        dataAddress.setType(dataVendorDetails.get().getAddress().getType());
+
+        BeanUtils.copyProperties(vendor.getVendorDetails(), dataVendorDetails.get());
+        BeanUtils.copyProperties(vendor, dataVendor.get());
+
+        dataVendorDetails.get().setAddress(dataAddress);
+        dataVendor.get().setVendorDetails(dataVendorDetails.get());
+
+        BeanUtils.copyProperties(vendorRepository.save(dataVendor.get()), vendor);
         return vendor;
     }
 
@@ -66,21 +86,17 @@ public class RegistrationService {
         return viewVendorDetails;
     }
 
-    /*    public Vendor updateVendor(Vendor vendor) {
-
-        return vendor;
-    }*/
 
     public Community registerCommunity(Community community) {
         com.zero.campaign.register.data.Community dataCommunity = new com.zero.campaign.register.data.Community();
         com.zero.campaign.register.data.Address dataAddress = new com.zero.campaign.register.data.Address();
+
         BeanUtils.copyProperties(community, dataCommunity);
         BeanUtils.copyProperties(community.getAddress(), dataAddress);
-
         dataAddress.setType(ADDRESS_TYPE.BUSINESS);
-
         dataCommunity.setAddress(dataAddress);
         BeanUtils.copyProperties(communityRepository.save(dataCommunity), community);
+
         return community;
     }
 

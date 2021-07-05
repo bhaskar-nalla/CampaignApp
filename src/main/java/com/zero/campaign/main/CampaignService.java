@@ -25,17 +25,10 @@ public class CampaignService {
     public Campaign proposeCampaign(Campaign campaign)
     {
         com.zero.campaign.main.data.Campaign dataCampaign = new com.zero.campaign.main.data.Campaign();
-        com.zero.campaign.register.data.Vendor dataVendor = new com.zero.campaign.register.data.Vendor();
         BeanUtils.copyProperties(campaign,dataCampaign);
-        BeanUtils.copyProperties(campaign.getVendor(),dataVendor);
-        dataCampaign.setVendor(dataVendor);
         dataCampaign.setStatus(CAMPAIGN_STATUS.PROPOSED);
         dataCampaign = campaignRepository.save(dataCampaign);
         BeanUtils.copyProperties(dataCampaign,campaign);
-        Vendor viewVendor = new Vendor();
-        BeanUtils.copyProperties(dataCampaign.getVendor(),viewVendor);
-        campaign.setVendor(viewVendor);
-
         return campaign;
     }
 
@@ -65,10 +58,9 @@ public class CampaignService {
 
     public void editCampaign(Campaign campaign)
     {
-        com.zero.campaign.main.data.Campaign dataCampaign = new com.zero.campaign.main.data.Campaign();
-
-        BeanUtils.copyProperties(campaign,dataCampaign);
-        campaignRepository.save(dataCampaign);
+        Optional<com.zero.campaign.main.data.Campaign> dataCampaign = campaignRepository.findById(campaign.getId());
+        BeanUtils.copyProperties(campaign,dataCampaign.get());
+        campaignRepository.save(dataCampaign.get());
     }
 
     public List<Campaign> getCampaignsByVendor(Long vendorId)
@@ -81,8 +73,6 @@ public class CampaignService {
             Campaign campaign = new Campaign();
             Vendor vendor = new Vendor();
             BeanUtils.copyProperties(campaignRec,campaign);
-            BeanUtils.copyProperties(campaignRec.getVendor(),vendor);
-            campaign.setVendor(vendor);
             viewCampaign.add(campaign);
         });
         return viewCampaign;
@@ -105,9 +95,6 @@ public class CampaignService {
         Optional<com.zero.campaign.main.data.Campaign> dataCampaign = campaignRepository.findById(campaignId);
         Campaign viewCampaign = new Campaign();
         BeanUtils.copyProperties(dataCampaign.get(),viewCampaign);
-        Vendor viewVendor = new Vendor();
-        BeanUtils.copyProperties(dataCampaign.get().getVendor(),viewVendor);
-        viewCampaign.setVendor(viewVendor);
         return viewCampaign;
     }
 }
