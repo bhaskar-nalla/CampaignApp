@@ -31,7 +31,7 @@ public class RegistrationController {
 
     @GetMapping("/vendor_details/{id}")
     public VendorDetails getVendorDetails(@PathVariable("id") Long id){
-        return  registrationService.getVendorDetailsByVendor(id);
+        return  registrationService.getVendorDetails(id);
     }
 
     @PostMapping("/community/register")
