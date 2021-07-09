@@ -33,6 +33,13 @@ public class Product {
     private String createdBy;
     private String updatedBy;
 
+    public Product(Set<ProductSize> productSizes) {
+        this.productSizes = productSizes;
+    }
+
+    public Product() {
+    }
+
     public long getId() {
         return id;
     }

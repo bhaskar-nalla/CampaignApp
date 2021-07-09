@@ -2,22 +2,26 @@ package com.zero.campaign.product.view;
 
 import com.zero.campaign.product.data.CATEGORY;
 
+import java.util.Set;
+
 
 public class Product {
 
-    private Long id;
+    private long id;
     private String name;
     private String type;
     private CATEGORY category;
     private String imagePath;
     private String description;
-    private String size;
+    private String measure;
 
-    public Long getId() {
+    private Set<ProductSize> productSizes;
+
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -36,7 +40,6 @@ public class Product {
     public void setType(String type) {
         this.type = type;
     }
-
 
     public CATEGORY getCategory() {
         return category;
@@ -62,24 +65,19 @@ public class Product {
         this.description = description;
     }
 
-    public String getSize() {
-        return size;
+    public String getMeasure() {
+        return measure;
     }
 
-    public void setSize(String size) {
-        this.size = size;
+    public void setMeasure(String measure) {
+        this.measure = measure;
     }
 
-    @Override
-    public String toString() {
-        return "Product{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", type='" + type + '\'' +
-                ", category=" + category +
-                ", imagePath='" + imagePath + '\'' +
-                ", description='" + description + '\'' +
-                ", size='" + size + '\'' +
-                '}';
+    public Set<ProductSize> getProductSizes() {
+        return productSizes;
+    }
+
+    public void setProductSizes(Set<ProductSize> productSizes) {
+        this.productSizes = productSizes;
     }
 }
