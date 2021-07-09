@@ -1,34 +1,25 @@
 package com.zero.campaign.product.view;
 
-import com.zero.campaign.main.data.Campaign;
-import java.time.LocalDateTime;
+import com.zero.campaign.product.data.CATEGORY;
 
 
 public class Product {
 
-    private long id;
+    private Long id;
     private String name;
     private String type;
-    private long campaignId;
+    private CATEGORY category;
+    private String imagePath;
+    private String description;
+    private String size;
 
-
-    public long getCampaignId() {
-        return campaignId;
-    }
-
-    public void setCampaignId(long campaignId) {
-        this.campaignId = campaignId;
-    }
-
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
-
 
     public String getName() {
         return name;
@@ -47,6 +38,48 @@ public class Product {
     }
 
 
+    public CATEGORY getCategory() {
+        return category;
+    }
 
+    public void setCategory(CATEGORY category) {
+        this.category = category;
+    }
 
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getSize() {
+        return size;
+    }
+
+    public void setSize(String size) {
+        this.size = size;
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", type='" + type + '\'' +
+                ", category=" + category +
+                ", imagePath='" + imagePath + '\'' +
+                ", description='" + description + '\'' +
+                ", size='" + size + '\'' +
+                '}';
+    }
 }

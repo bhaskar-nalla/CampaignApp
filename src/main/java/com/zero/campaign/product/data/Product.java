@@ -4,6 +4,7 @@ import com.zero.campaign.main.data.Campaign;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 
 @Entity
@@ -11,24 +12,23 @@ import java.time.LocalDateTime;
 public class Product {
 
     @Id
-    @SequenceGenerator(
-            name = "product_sequence",
-            sequenceName = "product_sequence",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "product_sequence"
-    )
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
 
     @Column(nullable = false)
     private String name;
     private String type;
+    private CATEGORY category;
+    private String imagePath;
+    private String description;
+    private String measure;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "campaign_id", nullable = false)
-    private Campaign campaign;
+
+    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
+    private Set<ProductSize> productSizes;
+
+    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
+    private Set<VendorProduct> vendorProducts;
 
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
@@ -39,18 +39,8 @@ public class Product {
         return id;
     }
 
-
     public void setId(long id) {
         this.id = id;
-    }
-
-
-    public Campaign getCampaign() {
-        return campaign;
-    }
-
-    public void setCampaign(Campaign campaign) {
-        this.campaign = campaign;
     }
 
     public String getName() {
@@ -67,6 +57,54 @@ public class Product {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public CATEGORY getCategory() {
+        return category;
+    }
+
+    public void setCategory(CATEGORY category) {
+        this.category = category;
+    }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getMeasure() {
+        return measure;
+    }
+
+    public void setMeasure(String measure) {
+        this.measure = measure;
+    }
+
+    public Set<ProductSize> getProductSizes() {
+        return productSizes;
+    }
+
+    public void setProductSizes(Set<ProductSize> productSizes) {
+        this.productSizes = productSizes;
+    }
+
+    public Set<VendorProduct> getVendorProducts() {
+        return vendorProducts;
+    }
+
+    public void setVendorProducts(Set<VendorProduct> vendorProducts) {
+        this.vendorProducts = vendorProducts;
     }
 
     public LocalDateTime getCreateDate() {
@@ -100,6 +138,4 @@ public class Product {
     public void setUpdatedBy(String updatedBy) {
         this.updatedBy = updatedBy;
     }
-
-
 }

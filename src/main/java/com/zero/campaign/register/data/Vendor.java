@@ -1,7 +1,12 @@
 package com.zero.campaign.register.data;
 
+import com.zero.campaign.main.data.Campaign;
+import com.zero.campaign.product.data.ProductSize;
+import com.zero.campaign.product.data.VendorProduct;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Entity
 @Table(name = "vendor")
@@ -17,9 +22,15 @@ public class Vendor {
     private String imagePath;
 
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "vendor_details_id", referencedColumnName = "id", nullable = false)
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "vendor_details_id", referencedColumnName = "id")
     private VendorDetails vendorDetails;
+
+    @OneToMany(mappedBy = "vendor", fetch = FetchType.LAZY)
+    private Set<VendorProduct> vendorProducts;
+
+    @OneToMany(mappedBy = "vendor", fetch = FetchType.LAZY)
+    private Set<Campaign> campaigns;
 
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
@@ -82,6 +93,14 @@ public class Vendor {
         this.vendorDetails = vendorDetails;
     }
 
+    public Set<VendorProduct> getVendorProducts() {
+        return vendorProducts;
+    }
+
+    public void setVendorProducts(Set<VendorProduct> vendorProducts) {
+        this.vendorProducts = vendorProducts;
+    }
+
     public LocalDateTime getCreateDate() {
         return createDate;
     }
@@ -114,20 +133,11 @@ public class Vendor {
         this.updatedBy = updatedBy;
     }
 
-    @Override
-    public String toString() {
-        return "Vendor{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", type=" + type +
-                ", phoneNumber=" + phoneNumber +
-                ", email='" + email + '\'' +
-                ", imagePath='" + imagePath + '\'' +
-                ", vendorDetails=" + vendorDetails +
-                ", createDate=" + createDate +
-                ", updateDate=" + updateDate +
-                ", createdBy='" + createdBy + '\'' +
-                ", updatedBy='" + updatedBy + '\'' +
-                '}';
+    public Set<Campaign> getCampaigns() {
+        return campaigns;
+    }
+
+    public void setCampaigns(Set<Campaign> campaigns) {
+        this.campaigns = campaigns;
     }
 }

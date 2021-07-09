@@ -1,31 +1,30 @@
-package com.zero.campaign.register.data;
+package com.zero.campaign.product.data;
+
+import com.zero.campaign.main.data.Campaign;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
+
 @Entity
-@Table(name = "vendor_details")
-public class VendorDetails {
+@Table(name = "product_size")
+public class ProductSize {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
-    private String aboutUs;
-    private String website;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "address_id", nullable = false)
-    private Address address;
-
-
-    @OneToOne(mappedBy = "vendorDetails")
-    private Vendor vendor;
-
+    @Column(nullable = false)
+    private Double size;
 
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
     private String createdBy;
     private String updatedBy;
+
+    @ManyToOne
+    @JoinColumn(name = "product_id", nullable=false)
+    private Product product;
 
     public Long getId() {
         return id;
@@ -35,36 +34,12 @@ public class VendorDetails {
         this.id = id;
     }
 
-    public String getAboutUs() {
-        return aboutUs;
+    public Double getSize() {
+        return size;
     }
 
-    public void setAboutUs(String aboutUs) {
-        this.aboutUs = aboutUs;
-    }
-
-    public String getWebsite() {
-        return website;
-    }
-
-    public void setWebsite(String website) {
-        this.website = website;
-    }
-
-    public Address getAddress() {
-        return address;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
-    }
-
-    public Vendor getVendor() {
-        return vendor;
-    }
-
-    public void setVendor(Vendor vendor) {
-        this.vendor = vendor;
+    public void setSize(Double size) {
+        this.size = size;
     }
 
     public LocalDateTime getCreateDate() {
@@ -97,5 +72,13 @@ public class VendorDetails {
 
     public void setUpdatedBy(String updatedBy) {
         this.updatedBy = updatedBy;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
     }
 }

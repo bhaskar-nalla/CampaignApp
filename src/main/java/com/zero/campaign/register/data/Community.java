@@ -1,7 +1,11 @@
 package com.zero.campaign.register.data;
 
+import com.zero.campaign.main.data.Campaign;
+import com.zero.campaign.product.data.CommunityVendorProduct;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Entity
 @Table(name = "community")
@@ -20,6 +24,11 @@ public class Community {
     @JoinColumn(name = "address_id", referencedColumnName = "id")
     private Address address;
 
+    @OneToMany(mappedBy = "community")
+    private Set<CommunityVendorProduct> communityVendorProducts;
+
+    @OneToMany(mappedBy = "community", fetch = FetchType.LAZY)
+    private Set<Campaign> campaigns;
 
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
@@ -42,6 +51,22 @@ public class Community {
         this.name = name;
     }
 
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
+
+    public long getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(long phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
     public String getEmail() {
         return email;
     }
@@ -50,12 +75,28 @@ public class Community {
         this.email = email;
     }
 
+    public Integer getUnitCount() {
+        return unitCount;
+    }
+
+    public void setUnitCount(Integer unitCount) {
+        this.unitCount = unitCount;
+    }
+
     public Address getAddress() {
         return address;
     }
 
     public void setAddress(Address address) {
         this.address = address;
+    }
+
+    public Set<CommunityVendorProduct> getCommunityVendorProducts() {
+        return communityVendorProducts;
+    }
+
+    public void setCommunityVendorProducts(Set<CommunityVendorProduct> communityVendorProducts) {
+        this.communityVendorProducts = communityVendorProducts;
     }
 
     public LocalDateTime getCreateDate() {
@@ -90,27 +131,11 @@ public class Community {
         this.updatedBy = updatedBy;
     }
 
-    public String getImagePath() {
-        return imagePath;
+    public Set<Campaign> getCampaigns() {
+        return campaigns;
     }
 
-    public void setImagePath(String imagePath) {
-        this.imagePath = imagePath;
-    }
-
-    public long getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(long phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public Integer getUnitCount() {
-        return unitCount;
-    }
-
-    public void setUnitCount(Integer unitCount) {
-        this.unitCount = unitCount;
+    public void setCampaigns(Set<Campaign> campaigns) {
+        this.campaigns = campaigns;
     }
 }

@@ -1,14 +1,14 @@
 package com.zero.campaign.main.data;
 
 import com.zero.campaign.main.CAMPAIGN_STATUS;
+import com.zero.campaign.product.data.CommunityVendorProduct;
 import com.zero.campaign.product.data.Product;
 import com.zero.campaign.register.data.Community;
 import com.zero.campaign.register.data.Vendor;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "campaign")
@@ -25,38 +25,31 @@ public class Campaign {
             generator = "campaign_sequence"
     )
     private Long id;
-    private String name;
-    @Column(nullable = false)
-    private Long communityId;
 
-    @Column(nullable = false)
-    private Long vendorId;
+    private String name;
+
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "vendor_id", nullable=false)
+    private Vendor vendor;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "community_id", nullable=false)
+    private Community community;
+
+
 
     private LocalDateTime startTime;
     private LocalDateTime endTime;
     private String imagePath;
     private CAMPAIGN_STATUS status;
 
-
-    @OneToMany(mappedBy = "campaign", fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL)
-    private List<Product> products;
-
-    public Long getCommunityId() {
-        return communityId;
+    public Campaign(Vendor vendor, Community community) {
+        this.vendor = vendor;
+        this.community = community;
     }
 
-    public void setCommunityId(Long communityId) {
-        this.communityId = communityId;
-    }
-
-    public List<Product> getProducts() {
-        return products;
-    }
-
-    public void setProducts(List<Product> products) {
-        this.products = products;
-    }
+    public Campaign(){}
 
     public Long getId() {
         return id;
@@ -72,6 +65,15 @@ public class Campaign {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+
+    public Vendor getVendor() {
+        return vendor;
+    }
+
+    public void setVendor(Vendor vendor) {
+        this.vendor = vendor;
     }
 
     public LocalDateTime getStartTime() {
@@ -106,11 +108,13 @@ public class Campaign {
         this.status = status;
     }
 
-    public Long getVendorId() {
-        return vendorId;
+    public Community getCommunity() {
+        return community;
     }
 
-    public void setVendorId(Long vendorId) {
-        this.vendorId = vendorId;
+    public void setCommunity(Community community) {
+        this.community = community;
     }
+
+
 }

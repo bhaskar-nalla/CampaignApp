@@ -18,6 +18,20 @@ public class Address {
     private String state;
     private long pin;
 
+    @OneToOne(mappedBy = "address", fetch = FetchType.LAZY)
+    private VendorDetails vendorDetails;
+
+    @OneToOne(mappedBy = "address", fetch = FetchType.LAZY)
+    private Community community;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getNumber() {
         return number;
     }
@@ -40,6 +54,14 @@ public class Address {
 
     public void setAddress2(String address2) {
         this.address2 = address2;
+    }
+
+    public ADDRESS_TYPE getType() {
+        return type;
+    }
+
+    public void setType(ADDRESS_TYPE type) {
+        this.type = type;
     }
 
     public String getCity() {
@@ -66,19 +88,19 @@ public class Address {
         this.pin = pin;
     }
 
-    public Long getId() {
-        return id;
+    public VendorDetails getVendorDetails() {
+        return vendorDetails;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setVendorDetails(VendorDetails vendorDetails) {
+        this.vendorDetails = vendorDetails;
     }
 
-    public ADDRESS_TYPE getType() {
-        return type;
+    public Community getCommunity() {
+        return community;
     }
 
-    public void setType(ADDRESS_TYPE type) {
-        this.type = type;
+    public void setCommunity(Community community) {
+        this.community = community;
     }
 }

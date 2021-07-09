@@ -2,6 +2,7 @@ package com.zero.campaign.main;
 
 import com.zero.campaign.main.data.CampaignRepository;
 import com.zero.campaign.main.view.Campaign;
+import com.zero.campaign.register.data.Community;
 import com.zero.campaign.register.view.Vendor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,9 +25,11 @@ public class CampaignService {
 
     public Campaign proposeCampaign(Campaign campaign)
     {
-        com.zero.campaign.main.data.Campaign dataCampaign = new com.zero.campaign.main.data.Campaign();
+        com.zero.campaign.main.data.Campaign dataCampaign = new com.zero.campaign.main.data.Campaign(new com.zero.campaign.register.data.Vendor(), new Community());
         BeanUtils.copyProperties(campaign,dataCampaign);
         dataCampaign.setStatus(CAMPAIGN_STATUS.PROPOSED);
+        dataCampaign.getCommunity().setId(campaign.getCommunityId());
+        dataCampaign.getVendor().setId(campaign.getVendorId());
         dataCampaign = campaignRepository.save(dataCampaign);
         BeanUtils.copyProperties(dataCampaign,campaign);
         return campaign;
