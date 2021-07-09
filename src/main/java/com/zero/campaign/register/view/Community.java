@@ -12,6 +12,12 @@ public class Community {
     private Integer unitCount;
     private Address address;
 
+    public Community(Address address) {
+        this.address = address;
+    }
+
+    public Community() {
+    }
 
     public String getName() {
         return name;

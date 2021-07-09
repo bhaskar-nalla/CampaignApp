@@ -29,7 +29,7 @@ public class RegistrationController {
         return  registrationService.getVendor(id);
     }
 
-    @GetMapping("/vendor_details/{id}")
+    @GetMapping("/vendor/{id}/details")
     public VendorDetails getVendorDetails(@PathVariable("id") Long id){
         return  registrationService.getVendorDetails(id);
     }
@@ -44,6 +44,12 @@ public class RegistrationController {
     public Community updateCommunity(@RequestBody Community community)
     {
         return registrationService.updateCommunity(community);
+    }
+
+    @GetMapping("/community/{id}")
+    public Community getCommunity(@PathVariable("id") Long id)
+    {
+        return registrationService.getCommunity(id);
     }
 
     @PostMapping("/customer/register")

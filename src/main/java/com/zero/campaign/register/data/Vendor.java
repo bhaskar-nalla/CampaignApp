@@ -22,8 +22,8 @@ public class Vendor {
     private String imagePath;
 
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "vendor_details_id", referencedColumnName = "id")
+    @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @JoinColumn(name = "vendor_details_id", referencedColumnName = "id",nullable=false)
     private VendorDetails vendorDetails;
 
     @OneToMany(mappedBy = "vendor", fetch = FetchType.LAZY)

@@ -1,6 +1,7 @@
 package com.zero.campaign.main;
 
 import com.zero.campaign.main.view.Campaign;
+import com.zero.campaign.main.view.CampaignDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -58,8 +59,14 @@ public class CampaignController {
     }
 
     @GetMapping("/{id}")
-    public Campaign getCampaignsByCommunityId(@PathVariable("id") Long campaignId)
+    public Campaign getCampaignByCommunityId(@PathVariable("id") Long campaignId)
     {
         return campaignService.getCampaignById(campaignId);
+    }
+
+    @GetMapping("/{id}/details")
+    public CampaignDetails getCampaignDetails(@PathVariable("id") Long campaignId)
+    {
+        return campaignService.getCampaignDetails(campaignId);
     }
 }

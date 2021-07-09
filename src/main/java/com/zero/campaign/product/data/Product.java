@@ -1,7 +1,5 @@
 package com.zero.campaign.product.data;
 
-import com.zero.campaign.main.data.Campaign;
-
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Set;

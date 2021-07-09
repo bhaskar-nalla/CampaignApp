@@ -35,10 +35,10 @@ public class RegistrationService {
         BeanUtils.copyProperties(vendor.getVendorDetails(), dataVendorDetails);
         BeanUtils.copyProperties(vendor.getVendorDetails().getAddress(), dataAddress);
 
+        dataAddress.setType(ADDRESS_TYPE.BUSINESS);
         dataVendorDetails.setAddress(dataAddress);
         dataVendor.setVendorDetails(dataVendorDetails);
 
-        dataAddress.setType(ADDRESS_TYPE.BUSINESS);
         BeanUtils.copyProperties(vendorRepository.save(dataVendor), vendor);
         return vendor;
     }
@@ -46,7 +46,7 @@ public class RegistrationService {
     public Vendor updateVendor(Vendor vendor) {
 
         Optional<com.zero.campaign.register.data.Vendor> dataVendor = vendorRepository.findById(vendor.getId());
-        Optional<com.zero.campaign.register.data.VendorDetails> dataVendorDetails = vendorDetailsRepository.findById( dataVendor.get().getVendorDetails().getId());
+        Optional<com.zero.campaign.register.data.VendorDetails> dataVendorDetails = vendorDetailsRepository.findById(dataVendor.get().getVendorDetails().getId());
         com.zero.campaign.register.data.Address dataAddress = new com.zero.campaign.register.data.Address();
 
         BeanUtils.copyProperties(vendor.getVendorDetails().getAddress(), dataAddress);
@@ -88,22 +88,41 @@ public class RegistrationService {
 
 
     public Community registerCommunity(Community community) {
-        com.zero.campaign.register.data.Community dataCommunity = new com.zero.campaign.register.data.Community();
-        com.zero.campaign.register.data.Address dataAddress = new com.zero.campaign.register.data.Address();
+        com.zero.campaign.register.data.Community dataCommunity = new com.zero.campaign.register.data.Community(
+                new com.zero.campaign.register.data.Address());
 
         BeanUtils.copyProperties(community, dataCommunity);
-        BeanUtils.copyProperties(community.getAddress(), dataAddress);
-        dataAddress.setType(ADDRESS_TYPE.BUSINESS);
-        dataCommunity.setAddress(dataAddress);
+        BeanUtils.copyProperties(community.getAddress(), dataCommunity.getAddress());
+        dataCommunity.getAddress().setType(ADDRESS_TYPE.BUSINESS);
         BeanUtils.copyProperties(communityRepository.save(dataCommunity), community);
 
         return community;
     }
 
     public Community updateCommunity(Community community) {
-        return null;
+
+        Optional<com.zero.campaign.register.data.Community> dataCommunity = communityRepository.findById(community.getId());
+        Optional<com.zero.campaign.register.data.Address> dataAddress = addressRepository.findById(dataCommunity.get().getAddress().getId());
+
+        BeanUtils.copyProperties(community.getAddress(), dataAddress.get());
+        dataAddress.get().setId(dataCommunity.get().getAddress().getId());
+
+        BeanUtils.copyProperties(community, dataCommunity.get());
+        dataCommunity.get().setAddress(dataAddress.get());
+
+        BeanUtils.copyProperties(communityRepository.save(dataCommunity.get()), community);
+        return community;
     }
 
+    public Community getCommunity(Long id) {
+
+        Community viewCommunity = new Community(new Address());
+        Optional<com.zero.campaign.register.data.Community> dataCommunity = communityRepository.findById(id);
+
+        BeanUtils.copyProperties(dataCommunity.get().getAddress(), viewCommunity.getAddress());
+        BeanUtils.copyProperties(dataCommunity.get(), viewCommunity);
+        return viewCommunity;
+    }
 
     public void registerUser() {
 
@@ -113,6 +132,7 @@ public class RegistrationService {
     public Boolean validatePassCode() {
         return false;
     }
+
 
 
 }

@@ -21,7 +21,7 @@ public class Community {
     private Integer unitCount;
 
     @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    @JoinColumn(name = "address_id", referencedColumnName = "id")
+    @JoinColumn(name = "address_id", referencedColumnName = "id", nullable = false)
     private Address address;
 
     @OneToMany(mappedBy = "community")
@@ -34,6 +34,12 @@ public class Community {
     private LocalDateTime updateDate;
     private String createdBy;
     private String updatedBy;
+
+    public Community(Address address) {
+        this.address = address;
+    }
+
+    public Community() {}
 
     public Long getId() {
         return id;

@@ -14,6 +14,11 @@ public class Vendor {
     private String imagePath;
     private VendorDetails vendorDetails;
 
+    public Vendor(VendorDetails vendorDetails) {
+        this.vendorDetails = vendorDetails;
+    }
+
+    public Vendor() {  }
 
     public Long getId() {
         return id;

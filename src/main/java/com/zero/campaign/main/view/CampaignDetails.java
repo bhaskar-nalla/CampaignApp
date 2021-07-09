@@ -7,7 +7,7 @@ import com.zero.campaign.register.view.Vendor;
 import java.time.LocalDateTime;
 
 
-public class Campaign {
+public class CampaignDetails {
 
 
     private Long id;
@@ -16,12 +16,16 @@ public class Campaign {
     private LocalDateTime endTime;
     private String imagePath;
     private CAMPAIGN_STATUS status;
-    private Long vendorId;
-    private Long communityId;
+    private Vendor vendor;
+    private Community community;
 
-    public Campaign() {
+    public CampaignDetails() {
     }
 
+    public CampaignDetails(Vendor vendor, Community community) {
+        this.vendor = vendor;
+        this.community = community;
+    }
 
     public Long getId() {
         return id;
@@ -71,33 +75,33 @@ public class Campaign {
         this.status = status;
     }
 
-    public Long getCommunityId() {
-        return communityId;
+    public Vendor getVendor() {
+        return vendor;
     }
 
-    public void setCommunityId(Long communityId) {
-        this.communityId = communityId;
+    public void setVendor(Vendor vendor) {
+        this.vendor = vendor;
     }
 
-    public Long getVendorId() {
-        return vendorId;
+    public Community getCommunity() {
+        return community;
     }
 
-    public void setVendorId(Long vendorId) {
-        this.vendorId = vendorId;
+    public void setCommunity(Community community) {
+        this.community = community;
     }
 
     @Override
     public String toString() {
-        return "Campaign{" +
+        return "CampaignDetails{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", startTime=" + startTime +
                 ", endTime=" + endTime +
                 ", imagePath='" + imagePath + '\'' +
                 ", status=" + status +
-                ", vendorId=" + vendorId +
-                ", communityId=" + communityId +
+                ", vendor=" + vendor +
+                ", community=" + community +
                 '}';
     }
 }
