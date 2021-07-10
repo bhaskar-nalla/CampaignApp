@@ -2,9 +2,6 @@ package com.zero.campaign.product.view;
 
 import com.zero.campaign.product.data.CATEGORY;
 
-import java.util.Set;
-
-
 public class Product {
 
     private long id;
@@ -15,7 +12,6 @@ public class Product {
     private String description;
     private String measure;
 
-    private Set<ProductSize> productSizes;
 
     public long getId() {
         return id;
@@ -73,11 +69,4 @@ public class Product {
         this.measure = measure;
     }
 
-    public Set<ProductSize> getProductSizes() {
-        return productSizes;
-    }
-
-    public void setProductSizes(Set<ProductSize> productSizes) {
-        this.productSizes = productSizes;
-    }
 }

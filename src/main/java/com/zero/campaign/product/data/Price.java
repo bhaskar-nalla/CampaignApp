@@ -7,8 +7,8 @@ import java.time.LocalDateTime;
 
 
 @Entity
-@Table(name = "product_size")
-public class ProductSize {
+@Table(name = "price")
+public class Price {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -16,6 +16,8 @@ public class ProductSize {
 
     @Column(nullable = false)
     private Double size;
+    private Double maxRetailPrice;
+    private Double vendorPrice;
 
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
@@ -23,8 +25,8 @@ public class ProductSize {
     private String updatedBy;
 
     @ManyToOne
-    @JoinColumn(name = "product_id", nullable=false)
-    private Product product;
+    @JoinColumn(name = "vendor_product_id", referencedColumnName = "id")
+    private VendorProduct vendorProduct;
 
     public Long getId() {
         return id;
@@ -74,11 +76,27 @@ public class ProductSize {
         this.updatedBy = updatedBy;
     }
 
-    public Product getProduct() {
-        return product;
+    public VendorProduct getVendorProduct() {
+        return vendorProduct;
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
+    public void setVendorProduct(VendorProduct vendorProduct) {
+        this.vendorProduct = vendorProduct;
+    }
+
+    public Double getMaxRetailPrice() {
+        return maxRetailPrice;
+    }
+
+    public void setMaxRetailPrice(Double maxRetailPrice) {
+        this.maxRetailPrice = maxRetailPrice;
+    }
+
+    public Double getVendorPrice() {
+        return vendorPrice;
+    }
+
+    public void setVendorPrice(Double vendorPrice) {
+        this.vendorPrice = vendorPrice;
     }
 }

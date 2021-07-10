@@ -1,7 +1,6 @@
 package com.zero.campaign.register.data;
 
 import com.zero.campaign.main.data.Campaign;
-import com.zero.campaign.product.data.ProductSize;
 import com.zero.campaign.product.data.VendorProduct;
 
 import javax.persistence.*;

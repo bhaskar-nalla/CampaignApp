@@ -22,8 +22,6 @@ public class Product {
     private String measure;
 
 
-    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
-    private Set<ProductSize> productSizes;
 
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
     private Set<VendorProduct> vendorProducts;
@@ -33,9 +31,6 @@ public class Product {
     private String createdBy;
     private String updatedBy;
 
-    public Product(Set<ProductSize> productSizes) {
-        this.productSizes = productSizes;
-    }
 
     public Product() {
     }
@@ -96,13 +91,6 @@ public class Product {
         this.measure = measure;
     }
 
-    public Set<ProductSize> getProductSizes() {
-        return productSizes;
-    }
-
-    public void setProductSizes(Set<ProductSize> productSizes) {
-        this.productSizes = productSizes;
-    }
 
     public Set<VendorProduct> getVendorProducts() {
         return vendorProducts;

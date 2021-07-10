@@ -26,8 +26,9 @@ public class VendorProduct {
     @OneToMany(mappedBy = "vendorProduct")
     private Set<CommunityVendorProduct> communityVendorProducts;
 
-    private Double maxRetailPrice;
-    private Double vendorPrice;
+
+    @OneToMany(mappedBy = "vendorProduct",cascade = CascadeType.ALL)
+    private Set<Price> prices;
 
 
     private LocalDateTime createDate;
@@ -60,22 +61,6 @@ public class VendorProduct {
     }
 
 
-
-    public Double getMaxRetailPrice() {
-        return maxRetailPrice;
-    }
-
-    public void setMaxRetailPrice(Double maxRetailPrice) {
-        this.maxRetailPrice = maxRetailPrice;
-    }
-
-    public Double getVendorPrice() {
-        return vendorPrice;
-    }
-
-    public void setVendorPrice(Double vendorPrice) {
-        this.vendorPrice = vendorPrice;
-    }
 
     public LocalDateTime getCreateDate() {
         return createDate;
@@ -115,5 +100,13 @@ public class VendorProduct {
 
     public void setCommunityVendorProducts(Set<CommunityVendorProduct> communityVendorProducts) {
         this.communityVendorProducts = communityVendorProducts;
+    }
+
+    public Set<Price> getPrices() {
+        return prices;
+    }
+
+    public void setPrices(Set<Price> prices) {
+        this.prices = prices;
     }
 }

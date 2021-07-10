@@ -1,6 +1,8 @@
 package com.zero.campaign.product;
 
+import com.zero.campaign.product.data.CATEGORY;
 import com.zero.campaign.product.view.Product;
+import com.zero.campaign.product.view.VendorProduct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -31,26 +33,34 @@ public class ProductController {
         return products;
     }
 
-    @GetMapping("product/{campaignId}")
-    public List<Product> getProductsByCampaign(@PathVariable String campaignId)
+    @GetMapping("category/{category}")
+    public List<Product> getProductsByCategory(@PathVariable("category") CATEGORY category)
+    {
+
+         return productService.getProductsByCategory(category);
+    }
+
+    @GetMapping("name/{name}")
+    public List<Product> getProductsByName(@PathVariable("name") String name)
     {
         List<Product> products= null;
         // custom logic
         return products;
     }
 
-    @GetMapping("product/{id}")
-    public Product getProduct(@PathVariable String id)
+    @GetMapping("/{id}")
+    public Product getProductById(@PathVariable("id") Long productId)
     {
-        Product product= null;
-        // custom logic
-        return product;
+        return productService.getProduct(productId);
     }
 
-
-
-
-
+    @GetMapping("vendor/{vendorId}")
+    public List<VendorProduct> getProductsByVendor(@PathVariable("vendorId") Long vendorId)
+    {
+        List<VendorProduct> vendorProduct= null;
+        // custom logic
+        return vendorProduct;
+    }
 
 
 }
