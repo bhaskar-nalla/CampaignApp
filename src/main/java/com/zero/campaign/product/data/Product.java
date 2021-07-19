@@ -23,7 +23,7 @@ public class Product {
 
 
 
-    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY,cascade = CascadeType.MERGE)
     private Set<VendorProduct> vendorProducts;
 
     private LocalDateTime createDate;

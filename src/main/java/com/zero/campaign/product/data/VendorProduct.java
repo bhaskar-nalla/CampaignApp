@@ -7,7 +7,10 @@ import java.time.LocalDateTime;
 import java.util.Set;
 
 @Entity
-@Table(name = "vendor_product")
+@Table(uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"product_id","vendor_id"}, name = "vendor_product_compositeKey")}
+)
+
 public class VendorProduct {
 
     @Id
@@ -31,10 +34,29 @@ public class VendorProduct {
     private Set<Price> prices;
 
 
+
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
     private String createdBy;
     private String updatedBy;
+
+    public VendorProduct() {
+
+    }
+
+    public VendorProduct(Vendor vendor, Product product) {
+        this.vendor = vendor;
+        this.product = product;
+    }
+    public VendorProduct( Product product, Set<Price> prices,Vendor vendor) {
+        this.product = product;
+        this.prices = prices;
+        this.vendor = vendor;
+    }
+    public VendorProduct(Vendor vendor) {
+        this.vendor = vendor;
+
+    }
 
     public Long getId() {
         return id;

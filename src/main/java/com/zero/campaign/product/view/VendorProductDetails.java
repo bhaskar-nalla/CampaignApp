@@ -1,18 +1,17 @@
 package com.zero.campaign.product.view;
 
-import com.zero.campaign.product.view.Price;
-
 import java.util.Set;
 
 
-public class VendorProduct {
+public class VendorProductDetails {
 
     private Long id;
     private Long vendorId;
-    private Long productId;
+    private Product product;
     private Set<Price> prices;
 
-    public VendorProduct(Set<Price> prices) {
+    public VendorProductDetails(Set<Price> prices) {
+
         this.prices = prices;
     }
 
@@ -32,12 +31,12 @@ public class VendorProduct {
         this.vendorId = vendorId;
     }
 
-    public Long getProductId() {
-        return productId;
+    public Product getProduct() {
+        return product;
     }
 
-    public void setProductId(Long productId) {
-        this.productId = productId;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
     public Set<Price> getPrices() {

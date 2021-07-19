@@ -21,7 +21,7 @@ public class CommunityVendorProduct {
     @JoinColumn(name = "vendor_product_id")
     private VendorProduct vendorProduct;
 
-    private Integer campaignDiscount;
+    private Integer communityDiscount;
     private Integer quantity;
 
 
@@ -31,6 +31,7 @@ public class CommunityVendorProduct {
     private String createdBy;
     private String updatedBy;
 
+
     public Long getId() {
         return id;
     }
@@ -39,6 +40,13 @@ public class CommunityVendorProduct {
         this.id = id;
     }
 
+    public Community getCommunity() {
+        return community;
+    }
+
+    public void setCommunity(Community community) {
+        this.community = community;
+    }
 
     public VendorProduct getVendorProduct() {
         return vendorProduct;
@@ -48,12 +56,12 @@ public class CommunityVendorProduct {
         this.vendorProduct = vendorProduct;
     }
 
-    public Integer getCampaignDiscount() {
-        return campaignDiscount;
+    public Integer getCommunityDiscount() {
+        return communityDiscount;
     }
 
-    public void setCampaignDiscount(Integer campaignDiscount) {
-        this.campaignDiscount = campaignDiscount;
+    public void setCommunityDiscount(Integer communityDiscount) {
+        this.communityDiscount = communityDiscount;
     }
 
     public Integer getQuantity() {
@@ -94,13 +102,5 @@ public class CommunityVendorProduct {
 
     public void setUpdatedBy(String updatedBy) {
         this.updatedBy = updatedBy;
-    }
-
-    public Community getCommunity() {
-        return community;
-    }
-
-    public void setCommunity(Community community) {
-        this.community = community;
     }
 }

@@ -3,6 +3,7 @@ package com.zero.campaign.product;
 import com.zero.campaign.product.data.CATEGORY;
 import com.zero.campaign.product.view.Product;
 import com.zero.campaign.product.view.VendorProduct;
+import com.zero.campaign.product.view.VendorProductDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -43,9 +44,7 @@ public class ProductController {
     @GetMapping("name/{name}")
     public List<Product> getProductsByName(@PathVariable("name") String name)
     {
-        List<Product> products= null;
-        // custom logic
-        return products;
+        return productService.getProductsByName(name);
     }
 
     @GetMapping("/{id}")
@@ -55,12 +54,18 @@ public class ProductController {
     }
 
     @GetMapping("vendor/{vendorId}")
-    public List<VendorProduct> getProductsByVendor(@PathVariable("vendorId") Long vendorId)
+    public List<VendorProductDetails> getProductsByVendor(@PathVariable("vendorId") Long vendorId)
     {
-        List<VendorProduct> vendorProduct= null;
-        // custom logic
-        return vendorProduct;
+        return productService.getProductsByVendor(vendorId);
     }
 
-
+    //TODO - REST URI needs to change
+    @RequestMapping(value = "/vendor/create",
+            method = RequestMethod.POST,
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody List<VendorProduct> createVendorProduct(@RequestBody List<VendorProduct> vendorProducts)
+    {
+        return productService.createVendorProduct(vendorProducts);
+    }
 }
