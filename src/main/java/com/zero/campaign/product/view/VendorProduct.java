@@ -1,6 +1,6 @@
 package com.zero.campaign.product.view;
 
-import com.zero.campaign.product.view.Price;
+
 
 import java.util.Set;
 
@@ -14,6 +14,9 @@ public class VendorProduct {
 
     public VendorProduct(Set<Price> prices) {
         this.prices = prices;
+    }
+
+    public VendorProduct() {
     }
 
     public Long getId() {

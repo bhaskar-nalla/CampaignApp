@@ -8,7 +8,7 @@ import java.util.Set;
 
 @Entity
 @Table(uniqueConstraints = {
-        @UniqueConstraint(columnNames = {"product_id","vendor_id"}, name = "vendor_product_compositeKey")}
+        @UniqueConstraint(columnNames = {"product_id","vendor_id"}, name = "vendor_product_uniqueKey")}
 )
 
 public class VendorProduct {
@@ -27,7 +27,7 @@ public class VendorProduct {
 
 
     @OneToMany(mappedBy = "vendorProduct")
-    private Set<CommunityVendorProduct> communityVendorProducts;
+    private Set<CampaignVendorProduct> campaignInventories;
 
 
     @OneToMany(mappedBy = "vendorProduct",cascade = CascadeType.ALL)
@@ -116,12 +116,12 @@ public class VendorProduct {
         this.updatedBy = updatedBy;
     }
 
-    public Set<CommunityVendorProduct> getCommunityVendorProducts() {
-        return communityVendorProducts;
+    public Set<CampaignVendorProduct> getCommunityVendorProducts() {
+        return campaignInventories;
     }
 
-    public void setCommunityVendorProducts(Set<CommunityVendorProduct> communityVendorProducts) {
-        this.communityVendorProducts = communityVendorProducts;
+    public void setCommunityVendorProducts(Set<CampaignVendorProduct> campaignInventories) {
+        this.campaignInventories = campaignInventories;
     }
 
     public Set<Price> getPrices() {

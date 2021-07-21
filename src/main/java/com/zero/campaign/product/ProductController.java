@@ -18,20 +18,16 @@ public class ProductController {
     private ProductService productService;
 
 
-    @RequestMapping(value = "/create",
-            method = RequestMethod.POST,
-            consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody List<Product> createProduct(@RequestBody List<Product> products)
+    @PostMapping("/create")
+    public List<Product> createProduct(@RequestBody List<Product> products)
     {
         return productService.createProduct(products);
     }
 
     @PutMapping("/update")
-    public List<Product> updateProduct(@RequestBody List<Product> products)
+    public Product updateProduct(@RequestBody Product product)
     {
-        // custom logic
-        return products;
+        return productService.updateProduct(product);
     }
 
     @GetMapping("category/{category}")
@@ -53,19 +49,4 @@ public class ProductController {
         return productService.getProduct(productId);
     }
 
-    @GetMapping("vendor/{vendorId}")
-    public List<VendorProductDetails> getProductsByVendor(@PathVariable("vendorId") Long vendorId)
-    {
-        return productService.getProductsByVendor(vendorId);
-    }
-
-    //TODO - REST URI needs to change
-    @RequestMapping(value = "/vendor/create",
-            method = RequestMethod.POST,
-            consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody List<VendorProduct> createVendorProduct(@RequestBody List<VendorProduct> vendorProducts)
-    {
-        return productService.createVendorProduct(vendorProducts);
-    }
 }

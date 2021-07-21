@@ -1,7 +1,6 @@
 package com.zero.campaign.register.data;
 
 import com.zero.campaign.main.data.Campaign;
-import com.zero.campaign.product.data.CommunityVendorProduct;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -16,6 +15,7 @@ public class Community {
     private Long id;
     private String name;
     private String imagePath;
+    @Column(unique = true)
     private long phoneNumber;
     private String email;
     private Integer unitCount;
@@ -24,8 +24,7 @@ public class Community {
     @JoinColumn(name = "address_id", referencedColumnName = "id", nullable = false)
     private Address address;
 
-    @OneToMany(mappedBy = "community")
-    private Set<CommunityVendorProduct> communityVendorProducts;
+
 
     @OneToMany(mappedBy = "community", fetch = FetchType.LAZY)
     private Set<Campaign> campaigns;
@@ -95,14 +94,6 @@ public class Community {
 
     public void setAddress(Address address) {
         this.address = address;
-    }
-
-    public Set<CommunityVendorProduct> getCommunityVendorProducts() {
-        return communityVendorProducts;
-    }
-
-    public void setCommunityVendorProducts(Set<CommunityVendorProduct> communityVendorProducts) {
-        this.communityVendorProducts = communityVendorProducts;
     }
 
     public LocalDateTime getCreateDate() {

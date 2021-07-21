@@ -7,15 +7,14 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "community_vendor_product")
-public class CommunityVendorProduct {
+public class CampaignVendorProduct {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "community_id")
-    private Community community;
+    @JoinColumn(name = "campaign_id")
+    private Campaign campaign;
 
     @ManyToOne
     @JoinColumn(name = "vendor_product_id")
@@ -31,6 +30,14 @@ public class CommunityVendorProduct {
     private String createdBy;
     private String updatedBy;
 
+    public CampaignVendorProduct(Campaign campaign, VendorProduct vendorProduct) {
+        this.campaign = campaign;
+        this.vendorProduct = vendorProduct;
+    }
+
+    public CampaignVendorProduct() {
+
+    }
 
     public Long getId() {
         return id;
@@ -40,12 +47,12 @@ public class CommunityVendorProduct {
         this.id = id;
     }
 
-    public Community getCommunity() {
-        return community;
+    public Campaign getCampaign() {
+        return campaign;
     }
 
-    public void setCommunity(Community community) {
-        this.community = community;
+    public void setCampaign(Campaign campaign) {
+        this.campaign = campaign;
     }
 
     public VendorProduct getVendorProduct() {

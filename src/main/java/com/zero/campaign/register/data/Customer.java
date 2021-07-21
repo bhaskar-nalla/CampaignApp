@@ -14,7 +14,9 @@ public class Customer {
     private String password;
     private String firstName;
     private String lastName;
+    @Column(unique = true)
     private long phoneNumber;
+    @Column(unique = true)
     private String email;
     private String unitNumber;
 

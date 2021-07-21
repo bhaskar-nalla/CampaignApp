@@ -16,7 +16,9 @@ public class Vendor {
     private Long id;
     private String name;
     private VENDOR_TYPE type;
+    @Column(unique = true)
     private long phoneNumber;
+    @Column(unique = true)
     private String email;
     private String imagePath;
 

@@ -1,8 +1,7 @@
 package com.zero.campaign.main.data;
 
 import com.zero.campaign.main.CAMPAIGN_STATUS;
-import com.zero.campaign.product.data.CommunityVendorProduct;
-import com.zero.campaign.product.data.Product;
+import com.zero.campaign.product.data.CampaignVendorProduct;
 import com.zero.campaign.register.data.Community;
 import com.zero.campaign.register.data.Vendor;
 
@@ -37,12 +36,18 @@ public class Campaign {
     @JoinColumn(name = "community_id", nullable=false)
     private Community community;
 
+    @OneToMany(mappedBy = "campaign")
+    private Set<CampaignVendorProduct> campaignVendorProducts;
+
 
 
     private LocalDateTime startTime;
     private LocalDateTime endTime;
     private String imagePath;
     private CAMPAIGN_STATUS status;
+    private Integer discountUpTo;
+    private Integer dealCount;
+    private DELIVERY_SPOT deliverySpot;
 
     public Campaign(Vendor vendor, Community community) {
         this.vendor = vendor;
@@ -116,5 +121,35 @@ public class Campaign {
         this.community = community;
     }
 
+    public Integer getDiscountUpTo() {
+        return discountUpTo;
+    }
 
+    public void setDiscountUpTo(Integer discountUpTo) {
+        this.discountUpTo = discountUpTo;
+    }
+
+    public Set<CampaignVendorProduct> getCampaignVendorProducts() {
+        return campaignVendorProducts;
+    }
+
+    public void setCampaignVendorProducts(Set<CampaignVendorProduct> campaignVendorProducts) {
+        this.campaignVendorProducts = campaignVendorProducts;
+    }
+
+    public Integer getDealCount() {
+        return dealCount;
+    }
+
+    public void setDealCount(Integer dealCount) {
+        this.dealCount = dealCount;
+    }
+
+    public DELIVERY_SPOT getDeliverySpot() {
+        return deliverySpot;
+    }
+
+    public void setDeliverySpot(DELIVERY_SPOT deliverySpot) {
+        this.deliverySpot = deliverySpot;
+    }
 }

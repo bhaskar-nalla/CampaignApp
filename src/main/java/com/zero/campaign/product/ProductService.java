@@ -1,14 +1,14 @@
 package com.zero.campaign.product;
 
 
-import com.zero.campaign.product.data.CATEGORY;
-import com.zero.campaign.product.data.Price;
-import com.zero.campaign.product.data.ProductRepository;
+import com.zero.campaign.main.data.Campaign;
+import com.zero.campaign.product.data.*;
+import com.zero.campaign.product.view.CampaignVendorProduct;
+import com.zero.campaign.product.view.CampaignVendorProductDetails;
 import com.zero.campaign.product.view.Product;
 import com.zero.campaign.product.view.VendorProduct;
 import com.zero.campaign.product.view.VendorProductDetails;
 import com.zero.campaign.register.data.Vendor;
-import com.zero.campaign.product.data.VendorProductRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +23,9 @@ public class ProductService {
 
     @Autowired
     private VendorProductRepository vendorProductRepository;
+
+    @Autowired
+    private CampaignInventoryRepository campaignInventoryRepository;
 
     public List<Product> createProduct(List<Product> products) {
 
@@ -40,9 +43,13 @@ public class ProductService {
     }
 
 
-    public List<Product> updateProduct(List<Product> products) {
-        // custom logic
-        return products;
+    public Product updateProduct(Product product) {
+
+        Optional<com.zero.campaign.product.data.Product> dataProduct = productRepository.findById(product.getId());
+        Product viewProduct = new Product();
+        BeanUtils.copyProperties(product, dataProduct.get());
+        BeanUtils.copyProperties(productRepository.save(dataProduct.get()), viewProduct);
+        return viewProduct;
     }
 
     public Product getProduct(Long id) {
@@ -79,13 +86,13 @@ public class ProductService {
     }
 
 
-    public List<VendorProduct> createVendorProduct(List<VendorProduct> vendorProducts) {
+    public List<VendorProduct> addProductsToVendorInventory(List<VendorProduct> vendorProducts) {
 
         Set<com.zero.campaign.product.data.VendorProduct> dataVendorProducts = new HashSet<>();
 
         vendorProducts.forEach(reqVendorProduct -> {
             com.zero.campaign.product.data.VendorProduct dataVendorProduct = new com.zero.campaign.product.data.VendorProduct(
-                    new com.zero.campaign.product.data.Product(),new HashSet<>(),
+                    new com.zero.campaign.product.data.Product(), new HashSet<>(),
                     new Vendor());
 
             BeanUtils.copyProperties(reqVendorProduct, dataVendorProduct);
@@ -93,12 +100,12 @@ public class ProductService {
             dataVendorProduct.getProduct().setId(reqVendorProduct.getProductId());
             dataVendorProduct.getVendor().setId(reqVendorProduct.getVendorId());
 
-            reqVendorProduct.getPrices().forEach(reqPrice ->{
+            reqVendorProduct.getPrices().forEach(reqPrice -> {
                 Price dataPrice = new Price();
                 BeanUtils.copyProperties(reqPrice, dataPrice);
                 dataPrice.setVendorProduct(dataVendorProduct);
                 dataVendorProduct.getPrices().add(dataPrice);
-                    });
+            });
             dataVendorProducts.add(dataVendorProduct);
         });
 
@@ -107,29 +114,77 @@ public class ProductService {
         return vendorProducts;
     }
 
-    public List<VendorProductDetails> getProductsByVendor(Long vendorId) {
+    public List<VendorProductDetails> getInventory(Long vendorId) {
         Collection<com.zero.campaign.product.data.VendorProduct> dataVendorProducts = vendorProductRepository.findProductsByVendor(vendorId);
-
         List<VendorProductDetails> vendorProducts = new ArrayList<>();
-        dataVendorProducts.forEach(reqVendorProduct -> {
-            VendorProductDetails viewVendorProduct = new VendorProductDetails( new HashSet<>());
-            Product viewProduct = new Product();
-            BeanUtils.copyProperties(reqVendorProduct, viewVendorProduct);
-            BeanUtils.copyProperties(reqVendorProduct.getProduct(), viewProduct);
-            viewVendorProduct.setProduct(viewProduct);
-            reqVendorProduct.getPrices().forEach(reqPrice ->{
 
-                com.zero.campaign.product.view.Price viewPrice = new com.zero.campaign.product.view.Price();
-                BeanUtils.copyProperties(reqPrice, viewPrice);
-                viewVendorProduct.getPrices().add(viewPrice);
+        dataVendorProducts.forEach(reqVendorProduct -> vendorProducts.add(buildInventory(reqVendorProduct)));
 
-            });
-
-            vendorProducts.add(viewVendorProduct);
-        });
         return vendorProducts;
     }
 
+
+    private VendorProductDetails buildInventory(com.zero.campaign.product.data.VendorProduct dataVendorProduct) {
+
+
+        VendorProductDetails viewVendorProduct = new VendorProductDetails(new HashSet<>());
+        Product viewProduct = new Product();
+        BeanUtils.copyProperties(dataVendorProduct, viewVendorProduct);
+        BeanUtils.copyProperties(dataVendorProduct.getProduct(), viewProduct);
+        viewVendorProduct.setProduct(viewProduct);
+        viewVendorProduct.setVendorId(dataVendorProduct.getVendor().getId());
+        dataVendorProduct.getPrices().forEach(reqPrice -> {
+
+            com.zero.campaign.product.view.Price viewPrice = new com.zero.campaign.product.view.Price();
+            BeanUtils.copyProperties(reqPrice, viewPrice);
+            viewVendorProduct.getPrices().add(viewPrice);
+
+        });
+
+
+        return viewVendorProduct;
+    }
+
+
+    public List<VendorProduct> updateInventory(List<VendorProduct> vendorProducts) {
+        return null;
+    }
+
+    public List<CampaignVendorProduct> addInventoryToCampaign(List<CampaignVendorProduct> campaignVendorProducts) {
+        Set<com.zero.campaign.product.data.CampaignVendorProduct> dataCampaignInventories = new HashSet<>();
+
+        campaignVendorProducts.forEach(reqCampaignVendorProduct -> {
+            com.zero.campaign.product.data.CampaignVendorProduct dataCampaignVendorProduct =
+                    new com.zero.campaign.product.data.CampaignVendorProduct(new Campaign(), new com.zero.campaign.product.data.VendorProduct());
+
+            BeanUtils.copyProperties(reqCampaignVendorProduct, dataCampaignVendorProduct);
+
+            dataCampaignVendorProduct.getCampaign().setId(reqCampaignVendorProduct.getCampaignId());
+            dataCampaignVendorProduct.getVendorProduct().setId(reqCampaignVendorProduct.getVendorProductId());
+            dataCampaignInventories.add(dataCampaignVendorProduct);
+        });
+
+        BeanUtils.copyProperties(campaignInventoryRepository.saveAll(dataCampaignInventories), campaignVendorProducts);
+
+        return campaignVendorProducts;
+    }
+
+    public List<CampaignVendorProductDetails> getCampaignInventory(Long campaignId, Long vendorId) {
+
+        Collection<com.zero.campaign.product.data.CampaignVendorProduct> dataCampaignInventories = campaignInventoryRepository.findCampaignInventory(campaignId, vendorId);
+        Collection<com.zero.campaign.product.data.VendorProduct> dataVendorProducts = new ArrayList<>();
+
+        List<CampaignVendorProductDetails> viewCampaignVendorProductDetailsList = new ArrayList<>();
+
+        dataCampaignInventories.forEach(reqVendorProduct -> {
+            CampaignVendorProductDetails viewCampaignVendorProductDetails = new CampaignVendorProductDetails();
+            BeanUtils.copyProperties(reqVendorProduct,viewCampaignVendorProductDetails);
+            viewCampaignVendorProductDetails.setVendorProductDetails(buildInventory(reqVendorProduct.getVendorProduct()));
+            viewCampaignVendorProductDetailsList.add(viewCampaignVendorProductDetails);
+
+        });
+        return viewCampaignVendorProductDetailsList;
+    }
 
 
 }

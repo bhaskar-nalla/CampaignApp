@@ -6,13 +6,14 @@ import java.util.Set;
 
 
 @Entity
-@Table(name = "product")
+@Table(name = "product",uniqueConstraints = {
+@UniqueConstraint(columnNames = {"name","category"}, name = "product_uniqueKey")}
+        )
 public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
-
     @Column(nullable = false)
     private String name;
     private String type;

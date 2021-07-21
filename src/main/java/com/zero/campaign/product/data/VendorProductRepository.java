@@ -12,4 +12,5 @@ import java.util.Collection;
 public interface VendorProductRepository extends JpaRepository<VendorProduct, Long> {
     @Query("SELECT vp FROM VendorProduct vp WHERE vp.vendor.id = :vendorId")
     Collection<VendorProduct> findProductsByVendor(Long vendorId);
+
 }
