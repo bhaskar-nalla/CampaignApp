@@ -1,17 +1,11 @@
-package com.zero.campaign.timeline;
+package com.zero.campaign.timeline.view;
 
 import com.zero.campaign.main.view.Campaign;
 
 import java.util.List;
 
-enum TIMELINE_TYPE{
-    HOME,
-    USER,
-    VENDOR
-
-}
-
 public class Timeline {
+
     private List<Campaign> campaigns;
     private TIMELINE_TYPE type;
 

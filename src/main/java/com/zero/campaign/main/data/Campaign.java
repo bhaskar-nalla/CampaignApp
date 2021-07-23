@@ -3,6 +3,7 @@ package com.zero.campaign.main.data;
 import com.zero.campaign.main.CAMPAIGN_STATUS;
 import com.zero.campaign.product.data.CampaignVendorProduct;
 import com.zero.campaign.register.data.Community;
+import com.zero.campaign.register.data.Customer;
 import com.zero.campaign.register.data.Vendor;
 
 import javax.persistence.*;
@@ -38,6 +39,8 @@ public class Campaign {
 
     @OneToMany(mappedBy = "campaign")
     private Set<CampaignVendorProduct> campaignVendorProducts;
+
+
 
 
 
@@ -152,4 +155,6 @@ public class Campaign {
     public void setDeliverySpot(DELIVERY_SPOT deliverySpot) {
         this.deliverySpot = deliverySpot;
     }
+
+
 }

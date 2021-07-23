@@ -1,10 +1,12 @@
 package com.zero.campaign.register;
 
 
+
 import com.zero.campaign.register.data.*;
-import com.zero.campaign.register.view.Community;
-import com.zero.campaign.register.view.Vendor;
 import com.zero.campaign.register.view.Address;
+import com.zero.campaign.register.view.Community;
+import com.zero.campaign.register.view.Customer;
+import com.zero.campaign.register.view.Vendor;
 import com.zero.campaign.register.view.VendorDetails;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,7 @@ public class RegistrationService {
     private CustomerRepository customerRepository;
     @Autowired
     private VendorDetailsRepository vendorDetailsRepository;
+
 
 
     public Vendor registerVendor(Vendor vendor) {
@@ -124,10 +127,31 @@ public class RegistrationService {
         return viewCommunity;
     }
 
-    public void registerUser() {
+    public Community getCustomerCommunity(Long customerId) {
+
+        Community viewCommunity = new Community();
+        Optional<com.zero.campaign.register.data.Customer> dataCustomer = customerRepository.findById(customerId);
+        BeanUtils.copyProperties(dataCustomer.get().getCommunity(),viewCommunity);
+        return viewCommunity;
+    }
+
+    public void registerCustomer(Customer customer) {
+
+        com.zero.campaign.register.data.Customer dataCustomer = new com.zero.campaign.register.data.Customer(new com.zero.campaign.register.data.Community());
+
+        BeanUtils.copyProperties(customer, dataCustomer);
+        dataCustomer.getCommunity().setId(customer.getCommunityId());
+        customerRepository.save(dataCustomer);
 
     }
 
+    public void updateCustomer(Customer customer) {
+        Optional<com.zero.campaign.register.data.Customer> dataCustomer = customerRepository.findById(customer.getId());
+
+        BeanUtils.copyProperties(customer,dataCustomer.get());
+        customerRepository.save(dataCustomer.get());
+
+    }
 
     public Boolean validatePassCode() {
         return false;

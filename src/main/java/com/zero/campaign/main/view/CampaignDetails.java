@@ -1,6 +1,7 @@
 package com.zero.campaign.main.view;
 
 import com.zero.campaign.main.CAMPAIGN_STATUS;
+import com.zero.campaign.main.data.DELIVERY_SPOT;
 import com.zero.campaign.register.view.Community;
 import com.zero.campaign.register.view.Vendor;
 
@@ -18,6 +19,10 @@ public class CampaignDetails {
     private CAMPAIGN_STATUS status;
     private Vendor vendor;
     private Community community;
+
+    private Integer discountUpTo;
+    private Integer dealCount;
+    private DELIVERY_SPOT deliverySpot;
 
     public CampaignDetails() {
     }
@@ -91,6 +96,30 @@ public class CampaignDetails {
         this.community = community;
     }
 
+    public Integer getDiscountUpTo() {
+        return discountUpTo;
+    }
+
+    public void setDiscountUpTo(Integer discountUpTo) {
+        this.discountUpTo = discountUpTo;
+    }
+
+    public Integer getDealCount() {
+        return dealCount;
+    }
+
+    public void setDealCount(Integer dealCount) {
+        this.dealCount = dealCount;
+    }
+
+    public DELIVERY_SPOT getDeliverySpot() {
+        return deliverySpot;
+    }
+
+    public void setDeliverySpot(DELIVERY_SPOT deliverySpot) {
+        this.deliverySpot = deliverySpot;
+    }
+
     @Override
     public String toString() {
         return "CampaignDetails{" +
@@ -102,6 +131,9 @@ public class CampaignDetails {
                 ", status=" + status +
                 ", vendor=" + vendor +
                 ", community=" + community +
+                ", discountUpTo=" + discountUpTo +
+                ", dealCount=" + dealCount +
+                ", deliverySpot=" + deliverySpot +
                 '}';
     }
 }

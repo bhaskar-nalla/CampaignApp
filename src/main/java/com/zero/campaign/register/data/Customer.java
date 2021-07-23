@@ -20,14 +20,21 @@ public class Customer {
     private String email;
     private String unitNumber;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "community_id", referencedColumnName = "id")
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "community_id", nullable = false)
     private Community community;
 
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
     private String createdBy;
     private String updatedBy;
+
+    public Customer(Community community) {
+        this.community = community;
+    }
+
+    public Customer() {
+    }
 
     public long getId() {
         return id;

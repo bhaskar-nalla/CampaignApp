@@ -53,9 +53,15 @@ public class RegistrationController {
     }
 
     @PostMapping("/customer/register")
-    public void registerCustomer()
+    public void registerCustomer(@RequestBody Customer customer)
     {
+         registrationService.registerCustomer(customer);
+    }
 
+    @PutMapping("/customer/update")
+    public void updateCustomer(@RequestBody Customer customer)
+    {
+        registrationService.updateCustomer(customer);
     }
 
     @PutMapping("/validate")

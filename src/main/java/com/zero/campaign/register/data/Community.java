@@ -8,7 +8,10 @@ import java.util.Set;
 
 @Entity
 @Table(name = "community")
-public class Community {
+public class
+
+
+Community {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -28,6 +31,9 @@ public class Community {
 
     @OneToMany(mappedBy = "community", fetch = FetchType.LAZY)
     private Set<Campaign> campaigns;
+
+  /*  @OneToOne(mappedBy = "community", fetch = FetchType.LAZY)
+    private Customer customer;*/
 
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
@@ -135,4 +141,12 @@ public class Community {
     public void setCampaigns(Set<Campaign> campaigns) {
         this.campaigns = campaigns;
     }
+
+    /*public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }*/
 }

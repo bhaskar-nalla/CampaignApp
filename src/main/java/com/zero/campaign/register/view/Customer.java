@@ -1,7 +1,5 @@
 package com.zero.campaign.register.view;
 
-import com.zero.campaign.register.data.Community;
-
 
 public class Customer {
 
@@ -15,7 +13,7 @@ public class Customer {
     private String email;
     private String unitNumber;
 
-    private Community community;
+    private Long communityId;
 
 
     public long getId() {
@@ -82,14 +80,13 @@ public class Customer {
         this.unitNumber = unitNumber;
     }
 
-    public Community getCommunity() {
-        return community;
+    public Long getCommunityId() {
+        return communityId;
     }
 
-    public void setCommunity(Community community) {
-        this.community = community;
+    public void setCommunityId(Long communityId) {
+        this.communityId = communityId;
     }
-
 
     @Override
     public String toString() {
@@ -102,7 +99,7 @@ public class Customer {
                 ", phoneNumber=" + phoneNumber +
                 ", email='" + email + '\'' +
                 ", unitNumber='" + unitNumber + '\'' +
-                ", community=" + community +
+                ", communityId=" + communityId +
                 '}';
     }
 }
